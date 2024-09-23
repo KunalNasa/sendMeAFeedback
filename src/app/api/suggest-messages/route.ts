@@ -15,7 +15,13 @@ export async function GET(request : Request) {
     return Response.json({
        success : true,
        message: responses 
-      }, {status : 200});
+      }, {status : 200,
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0',
+        },
+      });
   } catch (error) {
     console.error('Error fetching data from Gemini:', error);
     Response.json({ message: 'Internal Server Error' }, {status : 500});

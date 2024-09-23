@@ -78,13 +78,14 @@ export default function messagePage(){
     try {
       setSuggestionsLoading(true);
       // const response = await axios.get<ApiResponse>("/api/suggest-messages");
-      const response = await axios.get<ApiResponse>("/api/suggest-messages", {
+      const response = await axios.get<ApiResponse>(`/api/suggest-messages?_=${new Date().getTime()}`, {
         headers: {
           'Cache-Control': 'no-cache',
           'Pragma': 'no-cache',
           'Expires': '0'
         }
       });
+  
       const splitMessages : Array<string> = response.data.message[0].split("||");
       
       setGetSuggestions(splitMessages);
